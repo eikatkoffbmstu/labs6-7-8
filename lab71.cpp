@@ -8,11 +8,13 @@ void printFibonacci(int n, const std::string& threadName) {
     std::cout << threadName << " started" << std::endl;
     int a = 0, b = 1;
     for (int i = 0; i < n; ++i) {
+        mtx.lock();
         std::cout << threadName << ": " << a << std::endl;
+        mtx.unlock();
         int temp = a;
         a = b;
         b = temp + b;
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        
     }
     std::cout << threadName << " finished" << std::endl;
 }
@@ -20,8 +22,9 @@ void printFibonacci(int n, const std::string& threadName) {
 void printNaturalNumbers(int n, const std::string& threadName) {
     std::cout << threadName << " started" << std::endl;
     for (int i = 1; i <= n; ++i) {
+        mtx.lock();
         std::cout << threadName << ": " << i << std::endl;
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        mtx.unlock();
     }
     std::cout << threadName << " finished" << std::endl;
 }
