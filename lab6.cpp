@@ -32,7 +32,7 @@ public:
         if (month < 1 || month > 12) return false;
         if (day < 1) return false;
         if (month == 2) {
-            if (isLeapYear()) {
+            if (is366max()) {
                 return day <= 29;
             } else {
                 return day <= 28;
@@ -44,16 +44,12 @@ public:
         return day <= 31;
     }
 
-    bool isLeapYear() const {
-        if (year % 4 == 0) {
-            if (year % 100 == 0) {
-                return year % 400 == 0;
-            } else {
-                return true;
-            }
-        }
+    bool is366max() const {
+           if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 
+        return true;
+    else 
         return false;
-    }
+    }    
 
     void printDate() const {
         cout << day << "/" << month << "/" << year << endl;
